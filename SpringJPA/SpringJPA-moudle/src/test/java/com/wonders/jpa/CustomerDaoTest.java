@@ -50,9 +50,9 @@ public class CustomerDaoTest {
     @Rollback(false)
     public void testSave(){
         Customer customer = new Customer();
-        customer.setCustName("测试jpa保存6");
+        customer.setCustName("测试jpa保存8");
         LinkMan linkMan = new LinkMan();
-        linkMan.setLkmName("测试6的联系人1");
+        linkMan.setLkmName("测试8的联系人1");
         linkMan.setCustomer(customer);
         linkManDao.save(linkMan);
         /*
@@ -241,10 +241,17 @@ public class CustomerDaoTest {
                 //Join代表链接查询，通过root对象获取
                 //创建的过程中，第一个参数为关联对象的属性名称，第二个参数为连接查询的方式（left，inner，right）
                 //JoinType.LEFT : 左外连接,JoinType.INNER：内连接,JoinType.RIGHT：右外连接
-                // root的泛型是主表
-                Join<LinkMan, Customer> join = root.join("customer", JoinType.INNER);
+                // root的泛型是主表,第一个参数是要关联的属性，第二个参数:连接方式
+                // 返回的join对象，在使用join.get方法时只能获取关联表的属性，
+                // eg: 关联的Linkman对象时，join.get获得主表Customer对象的属性就会报错，
+                // 想要获得Customer的属性，只有通过root获得
+                Join<Customer, LinkMan> join = root.join("linkmans", JoinType.INNER);
+                // 匹配LinkMan对象中的lkmName属性
+                Predicate lkmName = criteriaBuilder.like(join.<String>get("lkmName").as(String.class), "测试%");
+                // 匹配Customer对象中的custName属性
+                Predicate custName = criteriaBuilder.like(root.get("custName").as(String.class), "测试%");
 
-                return criteriaBuilder.like(join.get("custName").as(String.class), "测试%");
+                return criteriaBuilder.and(lkmName,custName);
             }
         };
         //PageRequest对象是Pageable接口的实现类
@@ -262,8 +269,10 @@ public class CustomerDaoTest {
         System.out.println( "总记录数："+page.getTotalElements() );
         for (Customer customer : customers) {
             System.out.println( customer );
+
         }
     }
+
 
 
 }

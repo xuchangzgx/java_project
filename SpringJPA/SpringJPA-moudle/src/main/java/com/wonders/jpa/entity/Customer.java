@@ -37,8 +37,13 @@ public class Customer {
     @Column(name="cust_phone")//指定和表中cust_phone字段的映射关系
     private String custPhone;
 
+    /**
+     * 在客户对象的@OneToMany注解中添加fetch属性
+     * 		FetchType.EAGER	：立即加载
+     * 		FetchType.LAZY	：延迟加载
+     */
     //配置客户和联系人的一对多关系
-    @OneToMany(targetEntity= LinkMan.class)
+    @OneToMany(targetEntity= LinkMan.class,fetch = FetchType.EAGER)
     @JoinColumn(name="lkm_cust_id",referencedColumnName="cust_id")
     private Set<LinkMan> linkmans = new HashSet<LinkMan>(0);
 

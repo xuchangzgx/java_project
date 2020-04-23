@@ -1,6 +1,10 @@
 package com.wonders.jpa.dao;
 
 import com.wonders.jpa.entity.Customer;
+import com.wonders.jpa.entity.LinkMan;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
@@ -43,4 +47,5 @@ public interface CustomerDao extends JpaRepository<Customer,Long>, JpaSpecificat
     public List<Customer> findCustomerByCustNameLike(String custName);
 
     public List<Customer> findCustomerByCustNameLikeAndCustId(String custName,Long custId);
+
 }

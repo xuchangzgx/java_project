@@ -31,7 +31,8 @@ public class LinkMan implements Serializable {
     private String lkmMemo;
 
     //多对一关系映射：多个联系人对应客户
-    @ManyToOne(targetEntity=Customer.class,cascade = CascadeType.PERSIST)  //targetEntity配置的是一那一方的
+    // targetEntity配置的是一那一方的
+    @ManyToOne(targetEntity=Customer.class,cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JoinColumn(name="lkm_cust_id",referencedColumnName="cust_id")
     private Customer customer;//用它的主键，对应联系人表中的外键
 
