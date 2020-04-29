@@ -1,0 +1,18 @@
+server: 
+   port: 8764 
+encrypt:
+  key: foo   
+spring:
+  application:
+    name: wonders-cloud-config-server 
+  profiles:
+    active:
+    - native
+  cloud:
+    config:
+      server: 
+        native:
+          search-locations:
+          - file:E:\config\ 
+    
+    

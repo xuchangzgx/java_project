@@ -1,0 +1,38 @@
+server:
+   port: 8084 #设置服务端口
+   context-path: / #设置服务路径     
+spring:
+   jpa:
+      generate-ddl: false #是否执行schema.sql脚本初始化数据库结构
+      show-sql: true
+      hibernate:
+         ddl-auto: none
+   datasource:
+      platform: h2 #指定schema要使用的Platform(schema-${platform}.sql)，默认为: all
+      schema: classpath:schema.sql
+      data: classpath:data.sql
+   application:
+      name: wonders-provider-user2
+   security:
+      basic:
+         enabled: false
+logging:
+   level:
+      root: INFO
+      org.hibernate: INFO
+      org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+      org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+      com.wondergroup: DEBUG
+eureka:
+   client:
+      healthcheck:
+         enabled: true
+      registerWithEureka: true #是否将自己注册到Eureka服务中，默认为true
+      fetchRegistry: true #是否从Eureka中获取注册信息，默认为true
+      service-url:
+         defaultZone: http://user:password123@localhost:8761/eureka/
+#         defaultZone: http://localhost:8761/eureka/
+   instance:
+      prefer-ip-address: true
+      instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    

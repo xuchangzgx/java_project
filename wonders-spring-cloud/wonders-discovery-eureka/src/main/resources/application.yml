@@ -1,0 +1,19 @@
+spring:
+   application:
+      name: eureka-server
+   security: # 设置连接时的账号和密码
+      basic:
+         enabled: true
+      user:
+         name: user
+         password: password123
+server: # eureka服务端口
+   port: 8761
+eureka:
+   instance:
+      hostname: peer1
+   client:
+      register-with-eureka: true
+      fetch-registry: true # 这个的意思是从eureka server拉取注册表，集群中从相邻的eureka server拉取注册表
+      service-url: # eureka连接地址
+         defaultZone: http://user:password123@peer2:8762/eureka/
