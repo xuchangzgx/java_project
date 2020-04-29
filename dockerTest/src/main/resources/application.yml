@@ -1,0 +1,5 @@
+server:
+   port: 8081 #设置服务端口
+   servlet:
+      context-path: / #设置服务路径
+    
