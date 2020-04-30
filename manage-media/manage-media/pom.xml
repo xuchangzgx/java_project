@@ -34,6 +34,7 @@
         <module>xc-framework-utils</module>
         <module>xc-framework-model</module>
         <module>xc-framework-common</module>
+        <module>xc-service-manage-media-processor</module>
     </modules>
 
     <dependencyManagement>
