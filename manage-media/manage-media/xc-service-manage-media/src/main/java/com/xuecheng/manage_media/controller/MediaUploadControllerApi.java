@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * Created by Administrator.
  */
-@Api(value = "媒资管理接口",description = "媒资管理接口，提供文件上传、处理等接口")
+@Api(value = "媒资上传接口",description = "媒资上传接口，提供文件上传、处理等接口")
 public interface MediaUploadControllerApi {
 
     //文件上传前的准备工作,校验文件是否存在

@@ -13,14 +13,10 @@
     <artifactId>xc-service-manage-media</artifactId>
     <dependencies>
         <!-- 导入Eureka客户端的依赖 -->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.wonders</groupId>
             <artifactId>xc-framework-model</artifactId>
@@ -30,6 +26,17 @@
             <groupId>com.wonders</groupId>
             <artifactId>xc-framework-utils</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wonders</groupId>
+            <artifactId>xc-framework-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope> compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
         </dependency>
 
         <dependency>
@@ -62,12 +69,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>com.wonders</groupId>
-            <artifactId>xc-framework-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope> compile</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
     </dependencies>
 
 </project>
