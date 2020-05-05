@@ -42,6 +42,7 @@ public class ExceptionCatch {
     public ResponseResult exception(Exception exception){
         //记录日志
         LOGGER.error("catch exception:{}",exception.getMessage());
+        exception.printStackTrace();
         if(EXCEPTIONS == null){
             EXCEPTIONS = builder.build();//EXCEPTIONS构建成功
         }
