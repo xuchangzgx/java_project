@@ -1,0 +1,11 @@
+spring:
+   application:
+      name: eureka-server
+server:
+   port: 8761 # eureka服务端口
+eureka:
+   client:
+      register-with-eureka: true
+      fetch-registry: false # 这个的意思是从eureka server拉取注册表，集群中从相邻的eureka server拉取注册表
+      service-url:
+         defaultZone: http://127.0.0.1:8761/eureka/
