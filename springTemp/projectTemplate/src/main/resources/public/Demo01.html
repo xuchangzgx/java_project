@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html ng-app="Demo01">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		
+		<div ng-controller="ng1"> <!-- 绑定ng-app中的ng-controller控制器-->
+			{{name}}-{{age}}
+			<p ng-if="isShow">
+				测试ng-if
+			</p>
+		</div>
+		<div ng-controller="ng2">
+			{{name}}-{{age}}
+		</div>
+		
+		<div ng-init="firstName='john'">
+			
+			<p>在输入框中尝试输入：</p>
+			<p>姓名：<input type="text" ng-model="firstName"></p> <!-- 双向绑定ng-model -->
+			<p>你输入的为： {{ firstName }}</p>
+			
+		</div>
+		
+		<div data-ng-app="" data-ng-init="names=['Jani','Hege','Kai']"> <!-- 遍历数组 -->
+		  <p>使用 data-ng-repeat 来循环数组</p>
+		  <ul>
+			<li data-ng-repeat="x in names">
+			  {{ x }}
+			</li>
+		  </ul>
+		</div>
+		
+		<div ng-controller="ng3" > <!-- 遍历数组 -->
+		  <p>使用 ng-repeat 来循环数组</p>
+		  <ul>
+			<!-- <li ng-class="idx==$index?'color1':'color2'" ng-repeat=" item in names track by $index">
+				{{item}}{{$index}}
+			</li> -->
+			<li ng-repeat=" item in names track by $index"> <!-- names 数组变脸，item临时变量， $index 索引-->
+				{{item}}-{{$index}}
+			</li>
+		  </ul>
+		</div>
+		
+		<div ng-controller="ng4" > <!-- 自定义指令 -->
+			{{title}}
+			<!-- <my-tag></my-tag> 调用方式1-->
+			<!-- <div my-tag></div> 调用方式2-->
+			<!-- <div class="my-tag"></div>  调用方式3 -->
+		</div >
+		
+		<div ng-controller="ng5">
+			{{ msg | reverse }}
+		</div>
+		
+		<script src="js/angularjs/1.5.8/angular.js"></script>
+		<script>
+			
+			var app = angular.module('Demo01', []);
+			app.controller("ng1",function($scope,$rootScope,$timeout){ // $scope代表局部变量,$rootScope全局变量
+				$scope.name = "徐"; // 将变量和赋给局部变量
+				$rootScope.age = 18;
+				$scope.isShow=true;
+				$timeout(function(){
+					$scope.isShow=false;
+					$scope.$apply();
+					alert( $scope.isShow );
+				},0);
+				/* $scope.$on("$viewContentLoaded", function() {
+					$scope.isShow=false;
+					$scope.$apply();
+					alert( $scope.isShow );
+				}); */
+			});
+			
+			app.controller("ng2",function(){
+				
+			});
+			
+			app.controller("ng3",function($scope){
+				$scope.names = ['Jani','Hege','Kai'];
+			});
+			
+			app.controller("ng4",function($scope){
+				$scope.title = "我是一个自定义指令";
+			});
+			app.directive("myTag",function(){
+/* 				E 作为元素名使用
+				A 作为属性使用
+				C 作为类名使用
+				M 作为注释使用 */
+				return {
+					restrict : "C",
+					template:"<h1>自定义指令就是我！！！</h1>"
+				}
+			});
+			
+			app.controller("ng5",function($scope){
+				$scope.msg = "xuchang";
+			});
+			
+			app.filter('reverse', function() { //可以注入依赖
+				return function(text) {
+					return text.split("").reverse().join("");
+				}
+			});
+			
+		</script>
+	</body>
+</html>
